@@ -1,0 +1,15 @@
+val dockerNetwork = DockerNetwork("hnet", Option("192.168.33.0/16"))
+val clusterService = ServiceBuilder( dockerNetwork )
+  .addMaster(HOME + "/.ssh/id_rsa.pub", Seq(HOME + "/data"))
+  .addWorker()
+  .addWorker()
+  .addWorker()
+  .asKafkaCluster()
+  .serviceTimeouts(2, 1)
+
+val sbtBuild = SBuild("com.codogenic", "kafka-cluster", "0.0.1")
+  .services(clusterService)
+
+lazy val kafkaClusterProject = (project in file("."))
+  .settings( sbtBuild.settings )
+  .enablePlugins(FluentStyleSbt)
