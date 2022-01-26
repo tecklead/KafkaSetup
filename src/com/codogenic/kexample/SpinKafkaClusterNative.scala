@@ -12,14 +12,14 @@ import scala.concurrent.duration.DurationInt
 object SpinKafkaClusterNative extends ClusterNodeKafkaExtension with ClusterBuilderDefinitions with DockerKit{
 
   val hnet = DockerNetwork("hnet", Option("192.168.33.0/16"))
-  val container = ServiceBuilder(hnet).addMaster().asKafkaCluster().masterNode.kafkaNodeDefinition(None)
+  val container = ServiceBuilder(hnet).addMaster().asKafkaCluster().masterNode.kafkaNodeDefinition()
 
-  val _@(lHost, lDockerClient) = DockerHostAndClientReResolver.hostAndClient()
+  val _@(host, lDockerClient) = DockerHostAndClientReResolver.hostAndClient()
 
   override val StartContainersTimeout = 1.minute
   override val PullImagesTimeout = 1.minute
   override implicit val dockerFactory: DockerFactory = {
-    () => new DockerJavaExecutor(lHost, lDockerClient)
+    () => new DockerJavaExecutor(host, lDockerClient)
   }
   override def containerDefinitions: List[ContainerDefinition] = List(container)
 

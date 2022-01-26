@@ -11,7 +11,7 @@ import scala.concurrent.duration.DurationInt
 object SpinKafkaClusterUsingApi extends ClusterNodeKafkaExtension with ClusterBuilderDefinitions{
 
   val hnet = DockerNetwork("hnet", Option("192.168.33.0/16"))
-  val container = ServiceBuilder(hnet).addMaster().asKafkaCluster().masterNode.kafkaNodeDefinition(None)
+  val container = ServiceBuilder(hnet).addMaster().asKafkaCluster().masterNode.kafkaNodeDefinition()
 
   def main(args: Array[String]): Unit = {
 

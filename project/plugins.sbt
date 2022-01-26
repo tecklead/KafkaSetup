@@ -1,1 +1,1 @@
-addSbtPlugin("com.logicovercode" %% "fluent-style-sbt" % "0.0.523")
+addSbtPlugin("com.logicovercode" %% "fluent-style-sbt" % "0.0.525")
