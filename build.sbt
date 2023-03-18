@@ -13,8 +13,7 @@ val build = SBuild("com.codogenic", "kafka-cluster", "0.0.1")
   .services(hdfsService)
   .scalaVersions("2.13.7")
 
-packMain := Map("listtopics" -> "com.codogenic.kclients.ListTopics")
 
-val kafkaClusterProject = (project in file("."))
+val hdfsClusterProject = (project in file("."))
   .settings( build.settings )
   .enablePlugins(FluentStyleSbt, PackPlugin)
